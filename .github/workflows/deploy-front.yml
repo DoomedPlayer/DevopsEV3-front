@@ -32,7 +32,10 @@ jobs:
           ECR_REPOSITORY: ev3/front
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build \
+            --build-arg VITE_URL_VENTAS=${{ secrets.URL_VENTAS }} \
+            --build-arg VITE_URL_DESPACHOS=${{ secrets.URL_DESPACHOS }} \
+            -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Actualizar Kubeconfig
@@ -43,4 +46,5 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           TAG: ${{ github.sha }}
         run: |
+          kubectl apply -f frontend.yaml
           kubectl set image deployment/frontend-deployment frontend=$ECR_REGISTRY/ev3/front:$TAG
