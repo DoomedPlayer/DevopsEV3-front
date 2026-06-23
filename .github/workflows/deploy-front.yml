@@ -46,5 +46,5 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           TAG: ${{ github.sha }}
         run: |
-          kubectl apply -f frontend.yaml
+          kubectl apply -f k8s/
           kubectl set image deployment/frontend-deployment frontend=$ECR_REGISTRY/ev3/front:$TAG
