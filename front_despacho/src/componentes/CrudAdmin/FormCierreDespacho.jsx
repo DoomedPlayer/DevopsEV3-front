@@ -7,22 +7,24 @@ export const FormCierreDespacho = ({ despacho, onClose }) => {
 
   const onSubmit = async (data) => {
     console.log("onSubmit ejecutado");
+
     const jsonData = {
-      intento: data.intento,
-      despachado: data.despachado,
+      ...despacho, 
+      intento: parseInt(data.intento), 
+      despachado: data.despachado === "true", 
     };
 
-    console.log("Datos del formulario:", jsonData);
+    console.log("Datos a enviar al backend:", jsonData);
 
     try {
       await axios.put(
         `${import.meta.env.VITE_URL_DESPACHOS}/api/v1/despachos/${despacho.idDespacho}`,
         jsonData,
         {
-          headers:{
+          headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
-      }
+          }
         }
       );
       Swal.fire({
