@@ -14,7 +14,7 @@ La aplicación está diseñada para ser empaquetada en una imagen Docker y despl
 ### Pasos
 1. Clonar el repositorio:
    ```bash
-   git clone [https://github.com/tu-usuario/tu-repo-frontend.git](https://github.com/tu-usuario/tu-repo-frontend.git)
+   git clone https://github.com/DoomedPlayer/DevopsEV3-front.git
    
 2. Instalar las dependencias:
    ```bash
