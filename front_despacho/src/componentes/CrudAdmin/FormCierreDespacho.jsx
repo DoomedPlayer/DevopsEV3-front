@@ -27,7 +27,7 @@ export const FormCierreDespacho = ({ despacho, onClose }) => {
           }
         }
       );
-      Swal.fire({
+      await Swal.fire({
         title: "Despacho modificado 🛻!",
         text: "El despacho ha sido modificado exitosamente",
         icon: "success",
