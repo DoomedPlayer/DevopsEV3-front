@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpu-stress-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cpu-stress
+  template:
+    metadata:
+      labels:
+        app: cpu-stress
+    spec:
+      containers:
+      - name: stress
+        image: polinux/stress
+        command: ["stress"]
+        args: ["--cpu", "1"] # Consume 1 core internamente
+        resources:
+          requests:
+            cpu: "500m" # Pide medio core (0.5 vCPU) al nodo para poder programarse
+          limits:
+            cpu: "1000m"
